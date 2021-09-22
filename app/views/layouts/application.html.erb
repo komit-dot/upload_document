@@ -17,7 +17,7 @@
           <ul> <br>
               <li>
                 <a class="dropdown-item" data-toggle="dropdown" href="#"> 
-                  <h3><%= current_user.email %><br>  User has successfully Login !</h3>
+                  <h3><%= current_user.email %></h3>
                   <span class="caret"></span>
                 </a>
                 <ul>
@@ -35,8 +35,11 @@
         </div>
       </div>
     </nav>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>  
+    <% flash.each do |type, msg| %>
+  <div>
+    <%= msg %>
+  </div>
+<% end %>  
     <%= yield %>  
   </body>
 </html>

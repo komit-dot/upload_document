@@ -12,13 +12,11 @@ end
 
   def create
   @post = current_user.posts.new(post_params)
-  respond_to do |format|
     if @post.save
-      format.js # Will search for create.js.erb
+        redirect_to posts_path, flash: {notice: "Post Successfully Created."}
     else
-      format.html { render root_path }
+      render :index, flash: {notice: "Some Errors occurs while creating post."}
     end
-  end
 end
  
   def update
@@ -32,18 +30,16 @@ end
 
   def destroy
     @post.destroy
-    redirect_to posts_index_path
+    redirect_to posts_path
   end 
 
   def share
-    post = Post.find_by_id(params[:post_id])
-    respond_to do |format|
+      post = Post.find_by_id(params[:post_id])
       if post.update_column('shared', true)
-        format.js 
+        redirect_to posts_path, flash: {success: "Post Successfully shared."}
       else
-        format.html { render root_path }
+        render :index, flash: {error: "Some Errors occurs while sharing."}
       end
-    end
   end
 
   private
