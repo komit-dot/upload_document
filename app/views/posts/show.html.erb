@@ -1,0 +1,19 @@
+<h1>Details of this particular Image is here.</h1>
+
+<%= link_to 'All posts', posts_path %>
+<table>
+<th>Post Title: <%= @post.title %>,</th>
+
+  <th>Image URL:</th>
+  <td><%= @post.image_url.to_s %></td>
+
+ 
+<td><%= image_tag(@post.image.url, alt: 'Image') if @post.image? %></td>
+ 
+<th>Post Description: <%= @post.description %></th>
+ 
+<td><%= link_to 'Edit Post', edit_post_path(@post) %>
+<%= link_to 'Delete Post', @post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+
+</table>

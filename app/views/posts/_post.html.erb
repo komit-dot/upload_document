@@ -1,0 +1,13 @@
+<tr>
+  <td><%= link_to post.title, post_path(post) %></td>
+  <td><%= truncate(post.description, length: 150) %></td>
+  <td><% if post.image_url %><%= image_tag post.image_url(:thumb) %><% end %></td>
+  <td><%=raw tag_links(post.all_tags)%></td>
+  <td><div class="tags"><%=raw post.all_tags %></div></td>
+  <td><%= link_to 'Edit', edit_post_path(post) %> | 
+<%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %> 
+<% if !sharing %> | 
+<%= link_to "Share", post_share_path(post), :method=> :patch %>
+<% end %>
+</td> 
+</tr>

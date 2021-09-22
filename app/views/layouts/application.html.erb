@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PayreviewProject</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+    <% if user_signed_in? %>
+      <nav class="navbar navbar-inverse">
+      <div class="container">
+        <div id="navbar">
+          <ul> <br>
+              <li>
+                <a class="dropdown-item" data-toggle="dropdown" href="#"> 
+                  <h3><%= current_user.email %><br>  User has successfully Login !</h3>
+                  <span class="caret"></span>
+                </a>
+                <ul>
+                  <li><%= link_to 'Edit User Profile', edit_user_registration_path %></li>
+                  <li class="text-danger"><%= link_to 'Log out', destroy_user_session_path,method: :delete %></li>
+                  <li> List of All posts of Current User<strong>: <%= link_to 'All posts', posts_path %></li>
+                </ul>
+              </li>
+            <% else %>
+            <br>
+              <li><%= link_to 'Log In', new_user_session_path %></li>
+              <li><%= link_to 'Sign Up', new_user_registration_path %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>  
+    <%= yield %>  
+  </body>
+</html>
